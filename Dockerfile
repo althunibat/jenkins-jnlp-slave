@@ -12,13 +12,14 @@ RUN curl -L https://get.helm.sh/helm-v2.16.1-linux-amd64.tar.gz | tar zxv -C /tm
   && cp /tmp/linux-amd64/helm /usr/local/bin/helm \
   && chmod +x /usr/local/bin/helm
 
-RUN kubectl get nodes && \ 
-    helm init -c  && \
+RUN helm init -c  && \
     helm repo add godwit https://charts.godwit.io && \
     helm repo add bitnami https://charts.bitnami.com/bitnami && \
     helm plugin install https://github.com/chartmuseum/helm-push
+
 COPY install-k3d.sh /root/install-k3d.sh
 RUN /root/install-k3d.sh && rm /root/install-k3d.sh
+
 VOLUME [ "/var/run/docker.sock" ]
 VOLUME [ "/root/.kube/config" ]
 
