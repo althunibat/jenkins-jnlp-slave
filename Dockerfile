@@ -18,7 +18,7 @@ RUN helm init -c  && \
     helm plugin install https://github.com/chartmuseum/helm-push
 
 COPY install-k3d.sh /root/install-k3d.sh
-RUN /root/install-k3d.sh && rm /root/install-k3d.sh
+RUN chmod +x /root/install-k3d.sh && /root/install-k3d.sh && rm /root/install-k3d.sh
 
 VOLUME [ "/var/run/docker.sock" ]
 VOLUME [ "/root/.kube/config" ]
